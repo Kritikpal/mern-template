@@ -3,7 +3,7 @@ import "./App.css";
 import { getTestApiData } from "./api/testApi";
 import Data from "./component/Data";
 import AppNavbar from "./component/common/AppNavbar";
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 
 function App() {
   const [response, setResponse] = useState(null);
@@ -26,14 +26,11 @@ function App() {
   return (
     <>
       <AppNavbar />
-      <Data
-        isLoading={loading}
-        loading={<>Loading...</>}
-        hasError={hasError}
-        fallback={<div>Error occurred!</div>}
-      >
-        <Button variant="contained" color="primary" >Click</Button>
-      </Data>
+      <Card elevation={10} sx={{ padding: "1rem" }}>
+        <Data isLoading={loading} hasError={hasError}>
+          {response}
+        </Data>
+      </Card>
     </>
   );
 }

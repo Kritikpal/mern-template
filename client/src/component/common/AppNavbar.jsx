@@ -1,89 +1,162 @@
-import React, { useState } from "react";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
 
-const AppNavbar = () => {
-  const [open, setOpen] = useState(false);
+const pages = ['Products', 'Pricing', 'Blog'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+function AppNavbar() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <header className={`flex w-full items-center bg-white dark:bg-dark`}>
-      <div className="container">
-        <div className="relative -mx-4 flex items-center justify-between">
-          <div className="w-60 max-w-full px-4">
-            <a href="/#" className="block w-full py-5">
-              <img
-                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-primary.svg"
-                alt="logo"
-                className="dark:hidden"
-              />
-              <img
-                src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo-white.svg"
-                alt="logo"
-                className="hidden dark:block"
-              />
-            </a>
-          </div>
-          <div className="flex w-full items-center justify-between px-4">
-            <div>
-              <button
-                onClick={() => setOpen(!open)}
-                id="navbarToggler"
-                className={` ${
-                  open && "navbarTogglerActive"
-                } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
-              >
-                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
-                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
-                <span className="relative my-[6px] block h-[2px] w-[30px] bg-body-color dark:bg-white"></span>
-              </button>
-              <nav
-                // :className="!navbarOpen && 'hidden' "
-                id="navbarCollapse"
-                className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent ${
-                  !open && "hidden"
-                } `}
-              >
-                <ul className="block lg:flex">
-                  <ListItem NavLink="/#">Home</ListItem>
-                  <ListItem NavLink="/#">Payment</ListItem>
-                  <ListItem NavLink="/#">About</ListItem>
-                  <ListItem NavLink="/#">Blog</ListItem>
-                </ul>
-              </nav>
-            </div>
-            <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
-              <a
-                href="/#"
-                className="px-7 py-3 text-base font-medium text-dark hover:text-primary dark:text-white"
-              >
-                Sign in
-              </a>
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
 
-              <a
-                href="/#"
-                className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                Sign Up
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+                {page}
+              </Button>
+            ))}
+          </Box>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-};
-
+}
 export default AppNavbar;
-
-const ListItem = ({ children, NavLink }) => {
-  return (
-    <>
-      <li>
-        <a
-          href={NavLink}
-          className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-black lg:ml-12 lg:inline-flex"
-        >
-          {children}
-        </a>
-      </li>
-    </>
-  );
-};
