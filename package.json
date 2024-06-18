@@ -1,0 +1,13 @@
+{
+  "name": "mern-template",
+  "version": "1.0.0",
+  "description": "Merstack template",
+  "main": "index.js",
+  "scripts": {
+    "start:frontend": "cd client && npm run dev",
+    "start:backend": "cd server && npm start",
+    "mern": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+  },
+  "author": "",
+  "license": "ISC"
+}
