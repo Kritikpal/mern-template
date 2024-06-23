@@ -6,8 +6,11 @@
   "scripts": {
     "start:frontend": "cd client && npm run dev",
     "start:backend": "cd server && npm start",
-    "mern": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+    "mern": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@mui/material": "^5.15.20"
+  }
 }

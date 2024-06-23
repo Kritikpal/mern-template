@@ -3,6 +3,8 @@
 // Default exported function for error handling middleware
 import ApiResponse from "../utils/ApiResponse.js";
 export const errorHandler = (err, req, res, next) => {
+  // console.log(err.code);
+  // handel erros  for mongoose
   res
     .status(err.status || 500)
     .send(

@@ -1,37 +1,28 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { getTestApiData } from "./api/testApi";
-import Data from "./component/Data";
-import AppNavbar from "./component/common/AppNavbar";
-import { Button, Card } from "@mui/material";
-
+import LoginForm from "./component/forms/LoginForm";
+import { BrowserRouter, Route, Routes, redirect } from "react-router-dom";
+import DrawerAppBar from "./component/common/DrawerAppbar";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import SignUpForm from "./component/forms/SignUpForm";
+import ForgotPasswordForm from "./component/forms/ForgotPasswordForm";
+import NewPasswordForm from "./component/forms/NewPasswordForm";
 function App() {
-  const [response, setResponse] = useState(null);
-  const [hasError, setHasError] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getTestApiData()
-      .then((data) => {
-        setResponse(data.message);
-        setLoading(false);
-        setHasError(false);
-      })
-      .catch(() => {
-        setHasError(true);
-        setResponse(null);
-        setLoading(false);
-      });
-  }, []);
   return (
-    <>
-      <AppNavbar />
-      <Card elevation={10} sx={{ padding: "1rem" }}>
-        <Data isLoading={loading} hasError={hasError}>
-          {response}
-        </Data>
-      </Card>
-    </>
+    <div>
+      <DrawerAppBar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/forgotPassword" element={<ForgotPasswordForm />} />
+          <Route path="/resetPassword" element={<NewPasswordForm />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

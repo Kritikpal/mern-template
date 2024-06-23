@@ -1,0 +1,3 @@
+export const MONGO_DATABASE = process.env.MONGODB_DATABASE;
+export const MONGO_FULL_CONNECTION_STRING =
+  process.env.MONGODB_CONNECTION_STRING + process.env.MONGODB_DATABASE;
